@@ -5,6 +5,7 @@ use carlonicora\minimalism\core\services\exceptions\serviceNotFoundException;
 use carlonicora\minimalism\core\services\factories\servicesFactory;
 use carlonicora\minimalism\modules\jsonapi\responses\dataResponse;
 use carlonicora\minimalism\modules\jsonapi\responses\errorResponse;
+use carlonicora\minimalism\services\encrypter\encrypter;
 use Exception;
 use RuntimeException;
 
@@ -67,7 +68,7 @@ abstract class abstractJsonApiModel {
 
                 if (array_key_exists($parameterKey, $passedParameters) && $passedParameters[$parameterKey] !== null) {
                     if ($isParameterEncrypted || (!empty($this->encryptedParameters) && in_array($parameterName, $this->encryptedParameters, true))){
-                        $this->$parameterName = $this->services->service('encrypter')->decryptId($passedParameters[$parameterKey]);
+                        $this->$parameterName = $this->services->service(encrypter::class)->decryptId($passedParameters[$parameterKey]);
                     } else {
                         $this->$parameterName = $passedParameters[$parameterKey];
                     }

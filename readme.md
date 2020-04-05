@@ -1,9 +1,9 @@
 # minimalism modules
 
 **jsonApi** is an abstract module for *minimalism* that supports [{json:api}](https://jsonapi.org).
-This module can be used by [minimalism-module-jsonapiApi](https://github.com/carlonicora/minimalism-module-jsonapiapi),
-[minimalism-module-jsonapiCli](https://github.com/carlonicora/minimalism-module-jsonapicli) or
-[minimalism-module-jsonapiWeb](https://github.com/carlonicora/minimalism-module-jsonapiweb). This module is not a 
+This module can be used by [minimalism-module-jsonapi-api](https://github.com/carlonicora/minimalism-module-jsonapi-api),
+[minimalism-module-jsonapi-cli](https://github.com/carlonicora/minimalism-module-jsonapi-cli) or
+[minimalism-module-jsonapi-web](https://github.com/carlonicora/minimalism-module-jsonapi-web). This module is not a 
 standalone module. 
 
 # Getting Started
@@ -15,6 +15,8 @@ standalone module.
 # Requirements
 
 * php 7.4
+* [minimalism](https://github.com/carlonicora/minimalism) v10
+
 
 # Versioning
 

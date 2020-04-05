@@ -6,7 +6,6 @@ use carlonicora\minimalism\core\services\exceptions\serviceNotFoundException;
 use carlonicora\minimalism\core\services\factories\servicesFactory;
 use carlonicora\minimalism\modules\jsonapi\responses\dataResponse;
 use carlonicora\minimalism\modules\jsonapi\responses\errorResponse;
-use carlonicora\minimalism\services\paths\factories\serviceFactory;
 use carlonicora\minimalism\services\paths\paths;
 use Exception;
 use RuntimeException;
@@ -144,7 +143,7 @@ abstract class abstractJsonApiController implements controllerInterface {
 
         try {
             /** @var paths $paths */
-            $paths = $this->services->service(serviceFactory::class);
+            $paths = $this->services->service(paths::class);
 
             $content = file_get_contents($paths->getRoot() . DIRECTORY_SEPARATOR . 'composer.json');
             $content = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
