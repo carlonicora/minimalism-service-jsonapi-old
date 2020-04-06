@@ -82,7 +82,7 @@ class dataResponse extends abstractResponseObject implements responseInterface {
                 $response['data'][] = $data->toArray();
                 $this->buildIncluded($data);
             }
-        } else {
+        } elseif ($this->errors !== null) {
             $response['errors'] = [];
             /** @var errorObject $error */
             foreach ($this->errors ?? [] as $error) {
@@ -92,6 +92,8 @@ class dataResponse extends abstractResponseObject implements responseInterface {
                     $this->status = $error->status;
                 }
             }
+        } else {
+            $response['data'] = [];
         }
 
         if (!empty($this->links)){
