@@ -89,6 +89,7 @@ abstract class abstractJsonApiController implements controllerInterface {
                     if (!empty($input)) {
                         try {
                             $this->passedParameters = json_decode($input, true, 512, JSON_THROW_ON_ERROR);
+                            $this->bodyParameters = $this->passedParameters;
                         } catch (Exception $e) {
                             $this->passedParameters = [];
                         }
@@ -100,6 +101,7 @@ abstract class abstractJsonApiController implements controllerInterface {
 
                     foreach ($_POST as $parameter => $value) {
                         $this->passedParameters[$parameter] = $value;
+                        $this->bodyParameters[$parameter] = $value;
                     }
 
                     break;
