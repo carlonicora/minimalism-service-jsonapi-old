@@ -30,7 +30,7 @@ abstract class abstractJsonApiController implements controllerInterface {
     public string $version;
 
     /** @var array  */
-    private array $bodyParameters = [];
+    protected array $bodyParameters = [];
 
     /**
      * abstractController constructor.
