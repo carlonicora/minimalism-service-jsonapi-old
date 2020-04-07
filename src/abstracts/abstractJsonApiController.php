@@ -29,6 +29,9 @@ abstract class abstractJsonApiController implements controllerInterface {
     /** @var string */
     public string $version;
 
+    /** @var array  */
+    private array $bodyParameters = [];
+
     /**
      * abstractController constructor.
      * @param servicesFactory $services
@@ -65,6 +68,7 @@ abstract class abstractJsonApiController implements controllerInterface {
     protected function initialiseParameters(array $parameterValueList, array $parameterValues): void {
         if (!empty($parameterValueList) || !empty($parameterValues)) {
             $this->passedParameters = array_merge($parameterValueList, $parameterValues);
+            $this->bodyParameters = $this->passedParameters;
         } else {
             $this->parseUriParameters();
 
