@@ -77,7 +77,11 @@ class resourceObject extends resourceIdentifierObject {
 
                     /** @var resourceRelationship $relationship */
                     foreach ($relationships ?? [] as $relationship) {
-                        $response['relationships'][$type]['data'][] = $relationship->data->toArray(true);
+                        $rel = $relationship->data->toArray(true);
+                        if ($relationship->meta !== null){
+                            $rel['meta'] = $relationship->meta;
+                        }
+                        $response['relationships'][$type]['data'][] = $rel;
                     }
                 }
             }
