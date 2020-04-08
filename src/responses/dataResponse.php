@@ -150,6 +150,8 @@ class dataResponse extends abstractResponseObject implements responseInterface {
                     if ($addIncluded){
                         $this->included[] = $relationship->data;
                     }
+
+                    $this->buildIncluded($relationship->data);
                 }
             }
         }

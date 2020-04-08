@@ -68,21 +68,21 @@ class resourceObject extends resourceIdentifierObject {
             if ($this->hasLinks()) {
                 $response['links'] = $this->links;
             }
+        }
 
-            if ($this->relationships !== null) {
-                $response['relationships'] = [];
+        if ($this->relationships !== null) {
+            $response['relationships'] = [];
 
-                foreach ($this->relationships as $type => $relationships) {
-                    $response['relationships'][$type]['data'] = [];
+            foreach ($this->relationships as $type => $relationships) {
+                $response['relationships'][$type]['data'] = [];
 
-                    /** @var resourceRelationship $relationship */
-                    foreach ($relationships ?? [] as $relationship) {
-                        $rel = $relationship->data->toArray(true);
-                        if ($relationship->meta !== null){
-                            $rel['meta'] = $relationship->meta;
-                        }
-                        $response['relationships'][$type]['data'][] = $rel;
+                /** @var resourceRelationship $relationship */
+                foreach ($relationships ?? [] as $relationship) {
+                    $rel = $relationship->data->toArray(true);
+                    if ($relationship->meta !== null){
+                        $rel['meta'] = $relationship->meta;
                     }
+                    $response['relationships'][$type]['data'][] = $rel;
                 }
             }
         }
