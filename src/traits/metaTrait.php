@@ -1,5 +1,5 @@
 <?php
-namespace carlonicora\minimalism\modules\jsonapi\traits;
+namespace carlonicora\minimalism\service\jsonapi\traits;
 
 trait metaTrait {
     /** @var array|null */

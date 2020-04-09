@@ -1,7 +1,7 @@
 <?php
-namespace carlonicora\minimalism\modules\jsonapi\resources;
+namespace carlonicora\minimalism\service\jsonapi\resources;
 
-use carlonicora\minimalism\modules\jsonapi\traits\linksTrait;
+use carlonicora\minimalism\service\jsonapi\traits\linksTrait;
 
 class resourceObject extends resourceIdentifierObject {
     use linksTrait;
