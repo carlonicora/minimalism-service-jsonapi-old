@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  minimalism-module-jsonapi:
-    container_name: minimalism-module-jsonapi
+  minimalism-service-jsonapi:
+    container_name: minimalism-service-jsonapi
     image: carlonicora/php-cli-base:7.4.3.2
     working_dir: /app
     volumes:
