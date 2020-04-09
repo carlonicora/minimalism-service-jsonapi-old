@@ -67,8 +67,8 @@ abstract class abstractJsonApiController implements controllerInterface {
      */
     protected function initialiseParameters(array $parameterValueList, array $parameterValues): void {
         if (!empty($parameterValueList) || !empty($parameterValues)) {
-            $this->passedParameters = array_merge($parameterValueList, $parameterValues);
-            $this->bodyParameters = $this->passedParameters;
+            $this->passedParameters = $parameterValueList;
+            $this->bodyParameters = $parameterValues;
         } else {
             $this->parseUriParameters();
 
@@ -88,10 +88,9 @@ abstract class abstractJsonApiController implements controllerInterface {
 
                     if (!empty($input)) {
                         try {
-                            $this->passedParameters = json_decode($input, true, 512, JSON_THROW_ON_ERROR);
-                            $this->bodyParameters = $this->passedParameters;
+                            $this->bodyParameters = json_decode($input, true, 512, JSON_THROW_ON_ERROR);
                         } catch (Exception $e) {
-                            $this->passedParameters = [];
+                            $this->bodyParameters = [];
                         }
                     }
 
@@ -100,7 +99,6 @@ abstract class abstractJsonApiController implements controllerInterface {
                     }
 
                     foreach ($_POST as $parameter => $value) {
-                        $this->passedParameters[$parameter] = $value;
                         $this->bodyParameters[$parameter] = $value;
                     }
 
@@ -125,16 +123,32 @@ abstract class abstractJsonApiController implements controllerInterface {
         if (!(isset($uri) && $uri === '/')) {
             $variables = array_filter(explode('/', substr($uri, 1)), 'strlen');
 
-            $isModelVariable = true;
-            foreach ($variables as $variable) {
-                if ($isModelVariable && !is_numeric($variable)) {
-                    $this->modelName = str_replace('-', '\\', $variable);
-                } else {
-                    $this->passedParameters[] = $variable;
-                }
-                $isModelVariable = false;
+            $this->passedParameters = $this->parseModelNameFromUri($variables);
+        }
+    }
+
+    /**
+     * @param array $uriVariables
+     * @return array
+     */
+    protected function parseModelNameFromUri(array $uriVariables): array {
+        $firstArgument = current($uriVariables);
+        if (false === $firstArgument || is_numeric($firstArgument)) {
+            return $uriVariables;
+        }
+
+        $basePath = getcwd() . DIRECTORY_SEPARATOR . 'src'. DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR;
+
+        $this->modelName = array_shift($uriVariables);
+        foreach ($uriVariables as $uriParam) {
+            $classPath = $basePath . $this->modelName . '\\' . $uriParam;
+            if (is_dir($classPath) || is_file($classPath . '.php')) {
+                $this->modelName .= '\\' . $uriParam;
+                array_shift($uriVariables);
             }
         }
+
+        return $uriVariables;
     }
 
     /**
@@ -164,7 +178,7 @@ abstract class abstractJsonApiController implements controllerInterface {
             throw new RuntimeException('model ' . $this->modelName . ' not found', 404);
         }
 
-        $this->model = new $modelClass($this->services, $this->passedParameters, $verb, $this->file);
+        $this->model = new $modelClass($this->services, array_merge($this->passedParameters, $this->bodyParameters), $verb, $this->file);
 
         if ($this->model->redirect() !== ''){
             $this->initialiseModel($this->model->redirect());
