@@ -1,13 +1,13 @@
 <?php
-namespace carlonicora\minimalism\service\jsonapi\responses;
+namespace carlonicora\minimalism\services\jsonapi\responses;
 
-use carlonicora\minimalism\service\jsonapi\interfaces\responseInterface;
-use carlonicora\minimalism\service\jsonapi\abstracts\abstractResponseObject;
-use carlonicora\minimalism\service\jsonapi\resources\errorObject;
-use carlonicora\minimalism\service\jsonapi\resources\resourceObject;
-use carlonicora\minimalism\service\jsonapi\resources\resourceRelationship;
-use carlonicora\minimalism\service\jsonapi\traits\linksTrait;
-use carlonicora\minimalism\service\jsonapi\traits\metaTrait;
+use carlonicora\minimalism\services\jsonapi\interfaces\responseInterface;
+use carlonicora\minimalism\services\jsonapi\abstracts\abstractResponseObject;
+use carlonicora\minimalism\services\jsonapi\resources\errorObject;
+use carlonicora\minimalism\services\jsonapi\resources\resourceObject;
+use carlonicora\minimalism\services\jsonapi\resources\resourceRelationship;
+use carlonicora\minimalism\services\jsonapi\traits\linksTrait;
+use carlonicora\minimalism\services\jsonapi\traits\metaTrait;
 
 class dataResponse extends abstractResponseObject implements responseInterface {
     use metaTrait;

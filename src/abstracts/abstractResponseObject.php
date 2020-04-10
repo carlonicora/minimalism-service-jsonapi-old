@@ -1,5 +1,5 @@
 <?php
-namespace carlonicora\minimalism\service\jsonapi\abstracts;
+namespace carlonicora\minimalism\services\jsonapi\abstracts;
 
 abstract class abstractResponseObject {
     /** @var string  */

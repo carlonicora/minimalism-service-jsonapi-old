@@ -1,7 +1,7 @@
 {
   "name": "carlonicora/minimalism-service-jsonapi",
   "description": "{json:api} service for minimalism",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://carlonicora.com",
   "time": "2020-04-05",
   "license": "MIT",
@@ -17,7 +17,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "carlonicora\\minimalism\\service\\jsonapi\\":"src/"
+      "carlonicora\\minimalism\\services\\jsonapi\\":"src/"
     }
   },
   "require": {

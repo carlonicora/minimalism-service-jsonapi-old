@@ -1,5 +1,5 @@
 <?php
-namespace carlonicora\minimalism\service\jsonapi\interfaces;
+namespace carlonicora\minimalism\services\jsonapi\interfaces;
 
 interface responseInterface {
     /**

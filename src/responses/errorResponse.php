@@ -1,10 +1,10 @@
 <?php
-namespace carlonicora\minimalism\service\jsonapi\responses;
+namespace carlonicora\minimalism\services\jsonapi\responses;
 
-use carlonicora\minimalism\service\jsonapi\interfaces\responseInterface;
-use carlonicora\minimalism\service\jsonapi\abstracts\abstractResponseObject;
-use carlonicora\minimalism\service\jsonapi\resources\errorObject;
-use carlonicora\minimalism\service\jsonapi\traits\metaTrait;
+use carlonicora\minimalism\services\jsonapi\interfaces\responseInterface;
+use carlonicora\minimalism\services\jsonapi\abstracts\abstractResponseObject;
+use carlonicora\minimalism\services\jsonapi\resources\errorObject;
+use carlonicora\minimalism\services\jsonapi\traits\metaTrait;
 
 class errorResponse extends abstractResponseObject implements responseInterface {
     use metaTrait;
