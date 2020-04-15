@@ -161,9 +161,13 @@ class dataResponse extends abstractResponseObject implements responseInterface {
      * @return string
      */
     public function toJson() : string {
-        $response = $this->toArray();
+        if (!in_array($this->status, [self::HTTP_STATUS_204, self::HTTP_STATUS_205], true)) {
+            $response = $this->toArray();
 
-        return json_encode($response, JSON_THROW_ON_ERROR, 512);
+            return json_encode($response, JSON_THROW_ON_ERROR, 512);
+        }
+
+        return '';
     }
 
 }
