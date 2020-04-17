@@ -27,7 +27,7 @@ class errorObject extends abstractResponseObject {
         $this->status = $error['status'];
         $this->detail = $error['detail'];
         $this->code = $error['code'];
-        $this->id = $error['id'];
+        $this->id = $error['id'] ?? null;
     }
 
     /**
