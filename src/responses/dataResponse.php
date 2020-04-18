@@ -44,6 +44,7 @@ class dataResponse extends abstractResponseObject implements responseInterface {
         }
 
         $this->errors[] = $error;
+        $this->status = $error->getStatus();
     }
 
     /**

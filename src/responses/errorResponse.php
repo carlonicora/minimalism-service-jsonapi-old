@@ -20,12 +20,14 @@ class errorResponse extends abstractResponseObject implements responseInterface 
      * @param int|null $id
      */
     public function __construct(string $httpStatusCode, string $detail=null, string $code=null, int $id = null) {
-        $this->errors[] = new errorObject([
-            'status' => $httpStatusCode,
-            'detail' => $detail,
-            'code' => $code,
-            'id' => $id
-        ]);
+        if ($detail !== null || $code !== null || $id !== null) {
+            $this->errors[] = new errorObject([
+                'status' => $httpStatusCode,
+                'detail' => $detail,
+                'code' => $code,
+                'id' => $id
+            ]);
+        }
 
         $this->status = $httpStatusCode;
     }
