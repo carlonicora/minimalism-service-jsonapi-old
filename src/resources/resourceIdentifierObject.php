@@ -23,16 +23,19 @@ class resourceIdentifierObject {
     }
 
     /**
+     * @param bool $limitToIdentifierObject
      * @return array
      */
-    public function toArray() : array{
+    public function toArray(bool $limitToIdentifierObject=false) : array{
         $response = [
             'type' => $this->type,
             'id' => $this->id
         ];
 
-        if (!empty($this->meta)){
-            $response['meta'] = $this->meta;
+        if (!$limitToIdentifierObject) {
+            if (!empty($this->meta)) {
+                $response['meta'] = $this->meta;
+            }
         }
 
         return $response;

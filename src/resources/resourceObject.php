@@ -58,7 +58,7 @@ class resourceObject extends resourceIdentifierObject {
      * @return array
      */
     public function toArray(bool $limitToIdentifierObject=false) : array {
-        $response = parent::toArray();
+        $response = parent::toArray($limitToIdentifierObject);
 
         if (!$limitToIdentifierObject) {
             if ($this->attributes !== null) {
