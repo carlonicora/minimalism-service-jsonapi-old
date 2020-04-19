@@ -25,6 +25,9 @@ class dataResponse extends abstractResponseObject implements responseInterface {
     /** @var array|null  */
     public ?array $included=null;
 
+    /** @var bool  */
+    public bool $forceList=false;
+
     /**
      * responseObject constructor.
      * @param array $data
@@ -67,13 +70,25 @@ class dataResponse extends abstractResponseObject implements responseInterface {
     }
 
     /**
+     *
+     */
+    public function forceList(): void {
+        $this->forceList = true;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array {
         $response = [];
 
         if ($this->data !== null) {
-            $response['data'] = $this->data->toArray();
+            if ($this->forceList){
+                $response['data'] = [];
+                $response['data'][] = $this->data->toArray();
+            } else {
+                $response['data'] = $this->data->toArray();
+            }
             $this->buildIncluded($this->data);
         } else if ($this->dataList !== null) {
             $response['data'] = [];
