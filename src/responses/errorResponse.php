@@ -5,6 +5,7 @@ use carlonicora\minimalism\services\jsonapi\interfaces\responseInterface;
 use carlonicora\minimalism\services\jsonapi\abstracts\abstractResponseObject;
 use carlonicora\minimalism\services\jsonapi\resources\errorObject;
 use carlonicora\minimalism\services\jsonapi\traits\metaTrait;
+use JsonException;
 
 class errorResponse extends abstractResponseObject implements responseInterface {
     use metaTrait;
@@ -54,6 +55,7 @@ class errorResponse extends abstractResponseObject implements responseInterface 
 
     /**
      * @return string
+     * @throws JsonException
      */
     public function toJson(): string {
         $response = $this->toArray();

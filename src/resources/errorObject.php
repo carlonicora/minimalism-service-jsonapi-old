@@ -3,6 +3,7 @@ namespace carlonicora\minimalism\services\jsonapi\resources;
 
 use carlonicora\minimalism\services\jsonapi\abstracts\abstractResponseObject;
 use carlonicora\minimalism\services\jsonapi\traits\metaTrait;
+use JsonException;
 
 class errorObject extends abstractResponseObject {
     use metaTrait;
@@ -63,6 +64,7 @@ class errorObject extends abstractResponseObject {
 
     /**
      * @inheritDoc
+     * @throws JsonException
      */
     public function toJson(): string {
         $response = $this->toArray();

@@ -42,4 +42,16 @@ trait linksTrait {
 
         $this->links = array_merge($this->links, $links);
     }
+
+    /**
+     * @param string $name
+     * @return string|null
+     */
+    public function getLink(string $name): ?string {
+        if ($this->links === null || !array_key_exists($name, $this->links)){
+            return null;
+        }
+
+        return $this->links[$name];
+    }
 }

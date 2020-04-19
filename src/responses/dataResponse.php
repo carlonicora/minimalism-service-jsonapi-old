@@ -8,6 +8,7 @@ use carlonicora\minimalism\services\jsonapi\resources\resourceObject;
 use carlonicora\minimalism\services\jsonapi\resources\resourceRelationship;
 use carlonicora\minimalism\services\jsonapi\traits\linksTrait;
 use carlonicora\minimalism\services\jsonapi\traits\metaTrait;
+use JsonException;
 
 class dataResponse extends abstractResponseObject implements responseInterface {
     use metaTrait;
@@ -90,7 +91,7 @@ class dataResponse extends abstractResponseObject implements responseInterface {
                 $response['data'] = $this->data->toArray();
             }
             $this->buildIncluded($this->data);
-        } else if ($this->dataList !== null) {
+        } elseif ($this->dataList !== null) {
             $response['data'] = [];
 
             /** @var resourceObject $data */
@@ -175,6 +176,7 @@ class dataResponse extends abstractResponseObject implements responseInterface {
 
     /**
      * @return string
+     * @throws JsonException
      */
     public function toJson() : string {
         if (!in_array($this->status, [self::HTTP_STATUS_204, self::HTTP_STATUS_205], true)) {
