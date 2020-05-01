@@ -71,6 +71,22 @@ class dataResponse extends abstractResponseObject implements responseInterface {
     }
 
     /**
+     * @param array $dataList
+     */
+    public function addDataList(array $dataList) : void {
+        if ($this->dataList === null){
+            $this->dataList = [];
+        }
+
+        if ($this->data !== null){
+            $this->dataList = array_merge($this->dataList, [$this->data]);
+            $this->data = null;
+        }
+
+        $this->dataList = array_merge($this->dataList, $dataList);
+    }
+
+    /**
      *
      */
     public function forceList(): void {
