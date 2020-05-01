@@ -32,10 +32,8 @@ class resourceIdentifierObject {
             'id' => $this->id
         ];
 
-        if (!$limitToIdentifierObject) {
-            if (!empty($this->meta)) {
-                $response['meta'] = $this->meta;
-            }
+        if (!$limitToIdentifierObject && !empty($this->meta)) {
+            $response['meta'] = $this->meta;
         }
 
         return $response;

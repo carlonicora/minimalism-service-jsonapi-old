@@ -56,6 +56,7 @@ class errorResponse extends abstractResponseObject implements responseInterface 
     /**
      * @return string
      * @throws JsonException
+     * @noinspection PhpDocRedundantThrowsInspection
      */
     public function toJson(): string {
         $response = $this->toArray();

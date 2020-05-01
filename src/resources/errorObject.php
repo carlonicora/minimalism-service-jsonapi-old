@@ -65,6 +65,7 @@ class errorObject extends abstractResponseObject {
     /**
      * @inheritDoc
      * @throws JsonException
+     * @noinspection PhpDocRedundantThrowsInspection
      */
     public function toJson(): string {
         $response = $this->toArray();

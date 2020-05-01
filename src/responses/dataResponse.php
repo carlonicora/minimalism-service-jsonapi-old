@@ -177,6 +177,7 @@ class dataResponse extends abstractResponseObject implements responseInterface {
     /**
      * @return string
      * @throws JsonException
+     * @noinspection PhpDocRedundantThrowsInspection
      */
     public function toJson() : string {
         if (!in_array($this->status, [self::HTTP_STATUS_204, self::HTTP_STATUS_205], true)) {
