@@ -17,7 +17,7 @@ class resourceObject extends resourceIdentifierObject {
      * @param array $data
      */
     public function __construct(array $data) {
-        parent::__construct($data['type'], $data['id']);
+        parent::__construct($data['type'], $data['id'] ?? null);
 
         if (array_key_exists('attributes', $data)){
             $this->attributes = $data['attributes'];
@@ -47,8 +47,12 @@ class resourceObject extends resourceIdentifierObject {
     public function addRelationshipList(array $relationships): void {
         /** @var resourceRelationship $relationship */
         foreach ($relationships ?? [] as $relationshipName => $relationshipList) {
-            foreach ($relationshipList as $relationship) {
-                $this->addRelationship($relationship, $relationshipName);
+            if (is_int($relationshipName)){
+                $this->addRelationship($relationshipList);
+            } else {
+                foreach ($relationshipList as $relationship) {
+                    $this->addRelationship($relationship, $relationshipName);
+                }
             }
         }
     }

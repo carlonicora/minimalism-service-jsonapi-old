@@ -15,11 +15,13 @@ class resourceIdentifierObject {
     /**
      * resourceIdentifierObject constructor.
      * @param string $type
-     * @param string $id
+     * @param string|null $id
      */
-    public function __construct(string $type, string $id) {
+    public function __construct(string $type, ?string $id=null) {
         $this->type = $type;
-        $this->id = $id;
+        if ($id !== null) {
+            $this->id = $id;
+        }
     }
 
     /**
