@@ -8,7 +8,7 @@ trait modelTrait {
      * @param $parameter
      * @return resourceObject
      */
-    protected function validateJsonapiParameter($parameter) : resourceObject {
+    public function validateJsonapiParameter($parameter) : resourceObject {
         return new resourceObject($parameter);
     }
 }
