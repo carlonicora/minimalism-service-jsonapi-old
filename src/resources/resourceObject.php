@@ -22,6 +22,10 @@ class resourceObject extends resourceIdentifierObject {
         if (array_key_exists('attributes', $data)){
             $this->attributes = $data['attributes'];
         }
+
+        if (array_key_exists('meta', $data)){
+            $this->meta = $data['meta'];
+        }
     }
 
     /**
