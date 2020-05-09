@@ -1,14 +1,14 @@
 <?php
 namespace carlonicora\minimalism\services\jsonapi\interfaces;
 
-use carlonicora\minimalism\services\jsonapi\resources\resourceObject;
+use carlonicora\minimalism\services\jsonapi\jsonApiDocument;
 
 interface jsonapiModelInterface {
     public const PARAMETER_TYPE_JSONAPI = 'validateJsonapiParameter';
 
     /**
      * @param $parameter
-     * @return resourceObject
+     * @return jsonApiDocument
      */
-    public function validateJsonapiParameter($parameter) : resourceObject;
+    public function validateJsonapiParameter($parameter) : jsonApiDocument;
 }

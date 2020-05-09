@@ -13,6 +13,15 @@ trait linksTrait {
     }
 
     /**
+     * @param string $url
+     * @param array|null $meta
+     */
+    public function addSelfLink(string $url, array $meta = null) : void {
+        $this->addLink('self', $url, $meta);
+    }
+
+
+    /**
      * @param string $key
      * @param string $url
      * @param array|null $meta

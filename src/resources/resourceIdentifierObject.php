@@ -1,43 +1,47 @@
 <?php
 namespace carlonicora\minimalism\services\jsonapi\resources;
 
+use carlonicora\minimalism\services\jsonapi\abstracts\abstractDocumentTransform;
 use carlonicora\minimalism\services\jsonapi\traits\metaTrait;
 
-class resourceIdentifierObject {
+class resourceIdentifierObject extends abstractDocumentTransform {
     use metaTrait;
 
     /** @var string  */
     public string $type;
 
-    /** @var string */
-    public string $id;
+    /** @var string|null */
+    public ?string $id=null;
 
     /**
      * resourceIdentifierObject constructor.
      * @param string $type
      * @param string|null $id
+     * @param array|null $meta
      */
-    public function __construct(string $type, ?string $id=null) {
+    public function __construct(string $type, ?string $id=null, array $meta=null) {
         $this->type = $type;
+
         if ($id !== null) {
             $this->id = $id;
+        }
+
+        if ($meta !== null){
+            $this->meta = $meta;
         }
     }
 
     /**
-     * @param bool $limitToIdentifierObject
      * @return array
      */
-    public function toArray(bool $limitToIdentifierObject=false) : array{
+    public function toArray() : array{
         $response = [
             'type' => $this->type,
             'id' => $this->id
         ];
 
-        if (!$limitToIdentifierObject) {
-            if (!empty($this->meta)) {
-                $response['meta'] = $this->meta;
-            }
+        if (!empty($this->meta)) {
+            $response['meta'] = $this->meta;
         }
 
         return $response;

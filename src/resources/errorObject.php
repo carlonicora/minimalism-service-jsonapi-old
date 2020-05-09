@@ -1,12 +1,14 @@
 <?php
 namespace carlonicora\minimalism\services\jsonapi\resources;
 
-use carlonicora\minimalism\services\jsonapi\abstracts\abstractResponseObject;
+use carlonicora\minimalism\services\jsonapi\abstracts\abstractDocumentTransform;
 use carlonicora\minimalism\services\jsonapi\traits\metaTrait;
-use JsonException;
 
-class errorObject extends abstractResponseObject {
+class errorObject extends abstractDocumentTransform {
     use metaTrait;
+
+    /** @var string  */
+    public string $status;
 
     /** @var int|null  */
     public ?int $id=null;
@@ -22,13 +24,16 @@ class errorObject extends abstractResponseObject {
 
     /**
      * errorObject constructor.
-     * @param array $error
+     * @param string $status
+     * @param string $code
+     * @param string|null $detail
+     * @param int|null $id
      */
-    public function __construct(array $error) {
-        $this->status = $error['status'];
-        $this->detail = $error['detail'];
-        $this->code = $error['code'];
-        $this->id = $error['id'] ?? null;
+    public function __construct(string $status, string $code, ?string $detail=null, ?int $id=null) {
+        $this->status = $status;
+        $this->code = $code;
+        $this->detail = $detail;
+        $this->id = $id;
     }
 
     /**
@@ -47,10 +52,6 @@ class errorObject extends abstractResponseObject {
             $response['code'] = $this->code;
         }
 
-        if ($this->title !== null){
-            $response['title'] = $this->title;
-        }
-
         if ($this->detail !== null){
             $response['detail'] = $this->detail;
         }
@@ -60,15 +61,5 @@ class errorObject extends abstractResponseObject {
         }
 
         return $response;
-    }
-
-    /**
-     * @inheritDoc
-     * @throws JsonException
-     */
-    public function toJson(): string {
-        $response = $this->toArray();
-
-        return json_encode($response, JSON_THROW_ON_ERROR, 512);
     }
 }

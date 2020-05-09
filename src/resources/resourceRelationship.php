@@ -1,31 +1,37 @@
 <?php
 namespace carlonicora\minimalism\services\jsonapi\resources;
 
+use carlonicora\minimalism\services\jsonapi\abstracts\abstractDocumentTransform;
 use carlonicora\minimalism\services\jsonapi\traits\linksTrait;
 use carlonicora\minimalism\services\jsonapi\traits\metaTrait;
 
-class resourceRelationship {
+class resourceRelationship extends abstractDocumentTransform {
     use linksTrait;
     use metaTrait;
 
-    /** @var resourceObject  */
-    public resourceObject $data;
+    /** @var resourceLinkage  */
+    public resourceLinkage $data;
 
     /**
      * resourceRelationship constructor.
-     * @param resourceObject $resource
      */
-    public function __construct(resourceObject $resource) {
-        $this->data = $resource;
+    public function __construct() {
+        $this->data = new resourceLinkage();
     }
 
     /**
-     * @param bool $limitToIdentifierObject
+     * @param resourceObject $object
+     */
+    public function addResourceObject(resourceObject $object): void {
+        $this->data->addResourceObject($object);
+    }
+
+    /**
      * @return array
      */
-    public function toArray(bool $limitToIdentifierObject=false) : array {
+    public function toArray() : array {
         $response = [
-            'data' => $this->data->toArray($limitToIdentifierObject)
+            'data' => $this->data->toArray()
         ];
 
         if (!empty($this->links)){
